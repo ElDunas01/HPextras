@@ -1,8 +1,11 @@
 {
-  "name": "Aracnochip: electrónica interactiva",
-  "short_name": "Aracnochip",
+  "name": "HPextras: electrónica interactiva",
+  "short_name": "HPextras",
   "description": "Busca componentes, diagnostica fallas de circuitos y aparatos, practica con quizzes y usa calculadoras de electrónica.",
   "lang": "es-MX",
+  "id": "./",
+  "orientation": "any",
+  "categories": ["education", "utilities"],
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
