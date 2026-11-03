@@ -1,6 +1,6 @@
-# HPextras (v2.5)
+# HPextras (v2.9)
 
-App web instalable (PWA) de HPextras: diagnósticos, aprendizaje, MiniWiki, calculadoras, laboratorio y progreso. Funciona sin conexión después de la primera visita.
+App web instalable (PWA) de HPextras: diagnósticos, aprendizaje (quiz, juegos y retos), MiniWiki, calculadoras, laboratorio y progreso. Funciona sin conexión después de la primera visita.
 
 ## Archivos
 
@@ -51,14 +51,28 @@ Siguen necesitando conexión: los enlaces de MiniWiki › Fuentes y el botón de
 
 La versión debe ser la misma en dos sitios:
 
-- `index.html`: `const APP_V='2.5'` (y `<meta name="app-version">`).
-- `sw.js`: `var VERSION = "2.5"` (el caché se llama `hpextras-v` + VERSION).
+- `index.html`: `const APP_V='2.9'` (y `<meta name="app-version">`).
+- `sw.js`: `var VERSION = "2.9"` (el caché se llama `hpextras-v` + VERSION).
 
 Al cambiar `sw.js`, el navegador instala el service worker nuevo, borra los cachés viejos y la app se actualiza en la siguiente visita. El menú ⚙ muestra la versión y avisa si el servidor tiene otra distinta.
 
+## Novedades de la v2.9
+
+- **Buscador global** en la portada: encuentra componentes, Dudas (diagnósticos, preguntas, rutas y síntomas), Glosario, calculadoras y simuladores; resultados agrupados, sin distinguir acentos ni mayúsculas.
+- **Guía del multímetro** (MiniWiki › Más secciones › Multímetro) con dibujos SVG; se enlaza desde los pasos de Dudas que lo usan.
+- **Respaldo del progreso** visible en Ajustes (exportar, importar y borrar con confirmación y mensajes de éxito o error).
+- **Aviso de versión nueva**: el service worker nuevo espera hasta que la persona toque «Actualizar» (`sw.js` ya no usa `skipWaiting` al instalar; responde al mensaje `SKIP_WAITING`).
+- **Copiar resumen** al final de cada diagnóstico de Dudas, con enlaces a la MiniWiki y a la calculadora relacionada.
+- **Formulario de cita** en la portada que arma el mensaje de WhatsApp.
+- **Calculadoras nuevas**: consumo en kWh y costo, duración de batería, código de capacitores, conversor de unidades y calibre de cable.
+
+## Texto y vibración
+
+El texto no se puede seleccionar (solo los campos de escritura). Tocar el logo y el nombre del encabezado vibra 50 ms y vuelve al Inicio; el logo y el nombre de la portada solo vibran 50 ms y no navegan; mantener 2 s un botón, el logo, «HPextras» o «sin costo» vibra 200 ms (se cancela si sueltas antes o mueves el dedo). Chrome en Android exige haber tocado la página antes; iPhone no permite vibrar.
+
 ## Datos del usuario
 
-El progreso (XP, lecciones, quizzes, diagnósticos, preferencias) se guarda en el `localStorage` del navegador, solo en ese dispositivo. Al leerlo, la app valida su estructura y descarta lo que no cuadre; un dato dañado no rompe la app. El código de importación y exportación sigue en `index.html`, también con validación, pero sus botones no se muestran en Ajustes.
+El progreso (XP, quizzes, diagnósticos, preferencias) se guarda en el `localStorage` del navegador, solo en ese dispositivo. Al leerlo, la app valida su estructura y descarta lo que no cuadre; un dato dañado no rompe la app. El código de importación y exportación sigue en `index.html`, también con validación, pero sus botones no se muestran en Ajustes.
 
 ## Contenido técnico y de seguridad
 

@@ -1,11 +1,13 @@
 // Service worker: guarda la app para usarla sin conexión.
 // Al cambiar index.html, sube el número de versión para que los teléfonos descarguen la nueva.
-var VERSION = "2.5";
+var VERSION = "2.9";
 var CACHE = "hpextras-v" + VERSION;
 var ARCHIVOS = ["./", "./index.html", "./manifest.webmanifest", "./favicon-64.png", "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png"];
 self.addEventListener("install", function (e) {
-  e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(ARCHIVOS); }).then(function () { return self.skipWaiting(); }));
+  e.waitUntil(caches.open(CACHE).then(function (c) { return c.addAll(ARCHIVOS); }));
 });
+// La versión nueva espera hasta que la persona toque «Actualizar» en la app.
+self.addEventListener("message", function (e) { if (e.data === "SKIP_WAITING") { self.skipWaiting(); } });
 self.addEventListener("activate", function (e) {
   e.waitUntil(caches.keys().then(function (ks) {
     return Promise.all(ks.filter(function (k) { return k !== CACHE; }).map(function (k) { return caches.delete(k); }));
