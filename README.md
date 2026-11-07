@@ -1,4 +1,4 @@
-# HPextras (v2.9)
+# HPextras (v3.0)
 
 App web instalable (PWA) de HPextras: diagnósticos, aprendizaje (quiz, juegos y retos), MiniWiki, calculadoras, laboratorio y progreso. Funciona sin conexión después de la primera visita.
 
@@ -55,6 +55,16 @@ La versión debe ser la misma en dos sitios:
 - `sw.js`: `var VERSION = "2.9"` (el caché se llama `hpextras-v` + VERSION).
 
 Al cambiar `sw.js`, el navegador instala el service worker nuevo, borra los cachés viejos y la app se actualiza en la siguiente visita. El menú ⚙ muestra la versión y avisa si el servidor tiene otra distinta.
+
+## Novedades de la v3.0 (nuevo enfoque)
+
+La app ahora es la puerta de entrada al servicio de reparación: orienta, entretiene y lleva al cliente a la cita, sin enseñar a reparar.
+
+- **Dudas** (antes «diagnóstico»): mismo flujo de preguntas, pero el resultado es un **pre-diagnóstico** («Posible falla» y cómo lo confirmaría un técnico). Se quitaron las alternativas de solución, «Lo que yo haría» y el diagrama de pasos. Al final: enviar el resumen por WhatsApp o copiarlo.
+- **Aprendizaje**: tres tarjetas con dibujos SVG animados (Quiz, Juegos, Retos), un banner por sección y miniaturas animadas en cada juego.
+- **Herramientas**: portada con un multímetro animado midiendo un circuito, botón «Empezar» y tarjetas con iconos animados para Calculadoras y Laboratorio.
+- Los dibujos nuevos usan los colores del tema y se detienen con «animaciones: no» o «reducir movimiento».
+- Versión: `APP_V='3.0'` (y `<meta name="app-version">`) y `var VERSION = "3.0"` en `sw.js`.
 
 ## Novedades de la v2.9
 

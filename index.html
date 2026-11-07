@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" data-theme="hpextras">
 <head>
-<meta name="app-version" content="2.9">
+<meta name="app-version" content="3.0">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" id="mt" content="#0a0a0a"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="HPextras"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-192.png">
@@ -283,6 +283,46 @@ textarea[aria-invalid=true]{border-color:var(--bad,#e5484d);outline-color:var(--
 #upd .btn{white-space:nowrap}
 .hp-cita{margin:18px 0 6px}.cita .row{grid-template-columns:1fr}
 .mm .sch svg{max-width:340px}
+
+/* v3.0: enfoque de pre-diagnóstico y secciones animadas */
+.hxi{display:inline-block;width:56px;height:56px;flex:none}.hxi.big{width:84px;height:84px}.hxi.wide{width:72px;height:46px}.hxi svg,.hxs{display:block;width:100%;height:auto}
+.hxs{width:120px;margin:0 auto 6px}
+.hx-s{fill:none;stroke:var(--ac);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.hx-f{fill:var(--ac);stroke:none}
+.hx-t{fill:var(--tx);font:800 14px system-ui,sans-serif;text-anchor:middle}
+.hx-m{fill:var(--mu);font:600 10px system-ui,sans-serif;text-anchor:middle}
+.hx-g{transform-box:fill-box;transform-origin:center}
+.hx-flow{stroke-dasharray:5 9;animation:hxflow 1s linear infinite}
+.hx-bob{animation:hxbob 1.8s ease-in-out infinite}
+.hx-blink{animation:hxblink 1.4s steps(1) infinite}
+.hx-pulse{animation:hxpulse 1.6s ease-in-out infinite}
+.hx-rise{animation:hxrise 2.2s ease-out infinite}
+.hx-ring{fill:none;stroke:var(--ac);stroke-width:2;animation:hxring 1.6s ease-out infinite}
+.hx-needle{animation:hxswing 3.2s ease-in-out infinite}
+.hx-dp{animation:hxdp 6s linear infinite}
+.hx-sw{animation:hxsweep 2.4s ease-in-out infinite}
+.hx-c1{animation:hxcol 5s steps(1) infinite}.hx-c2{animation:hxcol 5s steps(1) infinite -1.6s}.hx-c3{animation:hxcol 5s steps(1) infinite -3.2s}
+@keyframes hxflow{to{stroke-dashoffset:-28}}
+@keyframes hxblink{0%,55%{opacity:1}56%,100%{opacity:.15}}
+@keyframes hxbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes hxpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.12)}}
+@keyframes hxrise{0%{transform:translateY(8px);opacity:0}30%{opacity:1}100%{transform:translateY(-8px);opacity:0}}
+@keyframes hxring{0%{transform:scale(1);opacity:.9}100%{transform:scale(2.6);opacity:0}}
+@keyframes hxswing{0%,100%{transform:rotate(-50deg)}50%{transform:rotate(50deg)}}
+@keyframes hxdp{0%,33%{opacity:1}34%,100%{opacity:0}}
+@keyframes hxsweep{0%,100%{transform:translateY(0);opacity:.9}50%{transform:translateY(40px);opacity:.3}}
+@keyframes hxcol{0%{fill:#8b4513}20%{fill:#e11d1d}40%{fill:#f59e0b}60%{fill:#22c55e}80%{fill:#3b82f6}}
+.hxb{display:flex;align-items:center;gap:14px;border:1px solid var(--ln);border-radius:16px;padding:10px 14px;margin:8px 0 12px;background:linear-gradient(135deg,var(--pn),var(--bg))}
+.hxb h3{margin:0 0 4px}.hxb p{margin:0}
+.hub{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}
+.hub button{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;padding:10px 4px;background:var(--pn);color:var(--tx);border:1px solid var(--ln);border-radius:14px;cursor:pointer;transition:transform .25s var(--muelle),border-color .2s}
+.hub button:hover{transform:translateY(-2px);border-color:var(--ac)}.hub button small{color:var(--mu);font-size:.72em}
+.hub [aria-pressed=true]{border-color:var(--ac);box-shadow:inset 0 0 0 2px var(--ac)}
+.hxo{display:flex!important;align-items:center;gap:12px}.hxo .hxi:not(.wide){width:52px;height:52px}
+.hxh{border:1px solid var(--ln);border-radius:18px;overflow:hidden;background:var(--pn);margin:8px 0 12px;text-align:center;padding:10px 10px 16px}
+.hxh svg{width:100%;max-width:420px;height:auto}.hxh h3{margin:6px 0 4px;font-size:1.25em}.hxh p{margin:0 0 10px}
+.dxr{text-align:center}.dxr h3{margin:4px 0 8px}.dxr .lab,.dxr p{text-align:left}
+.dxr .hx-sw{transform-box:fill-box}
 </style>
 </head>
 <body><button class="skip" type="button" onclick="document.getElementById('app').focus()">Saltar al contenido</button>
@@ -550,15 +590,51 @@ const TREE={"rBobina":{"r":"Bobina de voz abierta","S":[{"n":"Resoldar el cable 
 const SOL=a=>a.map((x,i)=>`<div class="card" style="--i:${i}"><h3>Solución ${i+1}${x.n?': '+x.n:''}</h3>${x.s?'<div class="lab">1. Técnica</div>':''}<p>${x.t}</p>${x.s?`<div class="lab">2. Sencilla</div><p>${x.s}</p>`:''}${x.d?`<div class="lab">3. Esquemático</div>${S(x.d)}`:''}</div>`).join('');
 const flow=s=>`<div class="sch"><svg viewBox="0 0 260 ${(s.length-1)*44+32}" style="max-width:300px" role="img" aria-label="Diagrama de pasos">`+s.map((t,i)=>`<g class="st" style="--i:${i}"><rect x="10" y="${i*44}" width="240" height="30" rx="6"/><text x="130" y="${i*44+19}" text-anchor="middle">${t}</text>`+(i<s.length-1?`<path d="M130 ${i*44+30}v14m-4-5l4 5 4-5"/>`:'')+'</g>').join('')+'</svg></div>';
 const SINT=[['No enciende','sy1'],['Suena mal o no suena','sy2'],['Falla a ratos','sy3'],['Huele a quemado o se calienta','o2'],['No gira o se atora','sy5'],['No carga','cg1']];
+
+/* ===== v3.0: dibujos animados (se apagan con «animaciones: no» o «reducir movimiento») ===== */
+const HXI={
+ quiz:()=>`<svg viewBox="0 0 64 64" aria-hidden="true"><rect class="hx-s hx-pulse hx-g" x="8" y="6" width="48" height="38" rx="11"/><path class="hx-s" d="M20 44v12l13-12"/><text class="hx-t hx-bob hx-g" x="32" y="36" style="font-size:30px">?</text><path class="hx-s hx-blink" d="M54 2l2 5M61 11l-5 1" style="stroke-width:2"/></svg>`,
+ games:()=>`<svg viewBox="0 0 64 64" aria-hidden="true"><text class="hx-m hx-rise" x="32" y="24" style="fill:var(--ac);font-size:12px;font-weight:800">+2 XP</text><path class="hx-s" d="M16 30h32a10 10 0 0 1 10 12l-2 8a6 6 0 0 1-10 2l-4-6H22l-4 6a6 6 0 0 1-10-2l-2-8a10 10 0 0 1 10-12z"/><path class="hx-s" d="M20 37v10M15 42h10"/><circle class="hx-f hx-blink" cx="42" cy="40" r="3"/><circle class="hx-f hx-blink" cx="49" cy="45" r="3" style="animation-delay:-.7s"/></svg>`,
+ retos:()=>`<svg viewBox="0 0 64 64" aria-hidden="true"><circle class="hx-f hx-pulse hx-g" cx="32" cy="26" r="18" style="opacity:.25"/><path class="hx-s" d="M24 38c-6-4-8-9-8-14a16 16 0 0132 0c0 5-2 10-8 14v5H24z"/><path class="hx-s" d="M25 50h14M28 56h8"/><path class="hx-s hx-blink" d="M26 28l6-10 6 10"/><path class="hx-s hx-blink" d="M32 2v4M8 10l3 3M56 10l-3 3M3 26h4M57 26h4" style="stroke-width:2"/></svg>`
+};
+const HXG={
+ sym:()=>`<svg viewBox="0 0 64 40" aria-hidden="true"><path class="hx-s" d="M2 20h12l4-9 6 18 6-18 6 18 4-9h16" style="opacity:.45"/><path class="hx-s hx-flow" d="M2 20h12l4-9 6 18 6-18 6 18 4-9h16" style="stroke-width:4;stroke-dasharray:1 13"/></svg>`,
+ col:()=>`<svg viewBox="0 0 64 40" aria-hidden="true"><path class="hx-s" d="M2 20h10M52 20h10"/><rect class="hx-s" x="12" y="9" width="40" height="22" rx="9"/><rect class="hx-c1" x="20" y="10" width="5" height="20"/><rect class="hx-c2" x="30" y="10" width="5" height="20"/><rect class="hx-c3" x="40" y="10" width="5" height="20"/></svg>`,
+ pre:()=>`<svg viewBox="0 0 64 40" aria-hidden="true">${[['m',12,0],['k',32,-.6],['M',52,-1.2]].map(([t,x,d])=>`<g class="hx-bob hx-g" style="animation-delay:${d}s"><circle class="hx-s" cx="${x}" cy="20" r="9"/><text class="hx-t" x="${x}" y="25" style="font-size:13px">${t}</text></g>`).join('')}</svg>`
+};
+const HXT={
+ calc:()=>`<svg viewBox="0 0 48 48" aria-hidden="true"><rect class="hx-s" x="9" y="4" width="30" height="40" rx="5"/><rect class="hx-s" x="14" y="9" width="20" height="9" rx="2"/><rect class="hx-f hx-blink" x="28" y="11" width="3" height="5"/>${[26,32,38].map(y=>[17,24,31].map(x=>`<circle class="hx-f${x==24&&y==32?' hx-pulse hx-g':''}" cx="${x}" cy="${y}" r="2"/>`).join('')).join('')}</svg>`,
+ lab:()=>`<svg viewBox="0 0 48 48" aria-hidden="true"><rect class="hx-s" x="4" y="8" width="40" height="30" rx="5"/><path class="hx-s hx-flow" d="M6 23q4-12 8 0t8 0t8 0t8 0"/><path class="hx-s" d="M16 44h16"/></svg>`
+};
+const hxToolsHero=()=>`<svg viewBox="0 0 360 170" role="img" aria-label="Multímetro midiendo un circuito con un LED">
+<rect class="hx-s" x="14" y="10" width="112" height="150" rx="14" style="fill:var(--bg)"/>
+<rect class="hx-s" x="26" y="22" width="88" height="34" rx="6"/>
+<g class="hx-t" style="font:700 20px ui-monospace,Consolas,monospace;text-anchor:middle"><text class="hx-dp" x="70" y="46">0.00</text><text class="hx-dp" x="70" y="46" style="animation-delay:-4s">4.98</text><text class="hx-dp" x="70" y="46" style="animation-delay:-2s">220</text></g>
+<g transform="translate(70 106)"><circle class="hx-s" r="30"/><path class="hx-s" d="M-22 -14l4 3M0 -30v6M22 -14l-4 3" style="stroke-width:2"/><line class="hx-s hx-needle" x1="0" y1="0" x2="0" y2="-24"/><circle class="hx-f" r="4"/></g>
+<text class="hx-m" x="70" y="152">V · Ω · A</text>
+<circle class="hx-f" cx="126" cy="60" r="5"/><circle cx="126" cy="120" r="5" style="fill:var(--tx)"/>
+<path class="hx-s hx-flow" d="M126 60C170 60 170 40 214 40" style="stroke:#f01e3a"/>
+<path class="hx-s hx-flow" d="M126 120C170 120 170 132 214 132" style="stroke:var(--tx)"/>
+<rect class="hx-s" x="206" y="10" width="148" height="150" rx="12" style="stroke-width:1.5;opacity:.6"/>
+<path class="hx-s hx-flow" d="M214 40H246l4-9 6 18 6-18 6 18 4-9H330V74"/>
+<path class="hx-s hx-flow" d="M330 100V132H286M278 132H214"/>
+<path class="hx-s" d="M320 74h20l-10 18zM320 96h20M286 120v24M278 120v24"/>
+<circle class="hx-f hx-pulse hx-g" cx="330" cy="84" r="16" style="opacity:.28"/>
+<circle class="hx-ring hx-g" cx="214" cy="40" r="6"/><circle class="hx-ring hx-g" cx="214" cy="132" r="6" style="animation-delay:-.8s"/>
+</svg>`;
+const dxScan=()=>`<svg class="hxs" viewBox="0 0 120 80" aria-hidden="true"><rect class="hx-s" x="30" y="14" width="60" height="52" rx="8"/><path class="hx-s" d="M42 14V6M54 14V6M66 14V6M78 14V6M42 66v8M54 66v8M66 66v8M78 66v8M30 28h-8M30 40h-8M30 52h-8M90 28h8M90 40h8M90 52h8" style="stroke-width:2"/><rect class="hx-f hx-sw" x="34" y="18" width="52" height="4" rx="2"/><g class="hx-bob hx-g"><circle class="hx-s" cx="78" cy="54" r="12" style="fill:var(--bg)"/><path class="hx-s" d="M87 63l10 10"/></g></svg>`;
+function dxResult(n){const U='https://wa.me/522961177776?text='+encodeURIComponent('Hola HPextras, hice el pre-diagnóstico en la app y quiero que revisen mi equipo.\n\n'+DXS);
+ return `<div class="card dxr">${dxScan()}<small>Pre-diagnóstico listo</small><h3>Posible falla: ${n.r}</h3><p class="mu">Es una idea de lo que le pasa a tu equipo según tus respuestas, no un diagnóstico definitivo.</p>${n.c?`<div class="lab">Cómo lo confirmaría un técnico</div><p>${n.c}</p>`:''}</div><div class="card"><h3>¿Y ahora?</h3><p>Llévalo a revisar: confirmo la falla, te digo el costo y no toco nada sin tu autorización.</p><div class="chips"><a class="hp-wa sm" target="_blank" rel="noopener noreferrer" href="${U}">Enviar por WhatsApp</a><button class="btn" type="button" data-cp="1">Copiar resumen</button></div></div>`}
+
 function dudas(el){
   let H=['start'],A=[];if(DSEL){H.push(DSEL);A.push(DLB||(SINT.find(s=>s[1]==DSEL)||[''])[0]);DLB='';DSEL=''}
   const draw=()=>{const k=H[H.length-1],n=TREE[k];if(n.r){seeDx(k);DXS=dxSummary(n,H,A)}
-   let h='<h2>Dudas: diagnóstico</h2><div class="warn" role="note"><b>Seguridad primero.</b> Desconecta el aparato de la corriente antes de abrirlo. <b>Si no tienes capacitación, no intentes descargar capacitores grandes ni trabajar en circuitos conectados a la red (110 o 220 V): acude a un técnico.</b> Una descarga puede causar quemaduras, paro cardíaco y la muerte.</div>';
+   let h='<h2>Dudas: ¿qué le pasa a tu equipo?</h2><div class="warn" role="note"><b>Seguridad primero.</b> Desconecta el aparato de la corriente antes de abrirlo. <b>Si no tienes capacitación, no intentes descargar capacitores grandes ni trabajar en circuitos conectados a la red (110 o 220 V): acude a un técnico.</b> Una descarga puede causar quemaduras, paro cardíaco y la muerte.</div>';
    if(A.length)h+=`<div class="crumbs">${A.map(a=>`<span class="tag">${a}</span>`).join('')}</div>`;
    const bt=a=>a.map(([t,c],i)=>`<button data-k="${c}" style="--i:${i}">${t}</button>`).join('');
-   if(k=='start')h+=`<div class="card"><h3>¿Cómo quieres empezar?</h3><p class="mu">Elige el aparato que falla o, si no sabes qué es, el síntoma que ves. Te haré preguntas sencillas y al final te diré la causa probable, cómo comprobarla y qué puedes hacer.</p></div><h3>Por tipo de equipo</h3><div class="opts two">${bt(n.o)}</div><h3>Por síntoma</h3><div class="opts two">${bt(SINT)}</div>`;
+   if(k=='start')h+=`<div class="card"><h3>¿Cómo quieres empezar?</h3><p class="mu">Elige el aparato que falla o, si no sabes qué es, el síntoma que ves. Te haré preguntas sencillas y al final te diré qué falla es la más probable, para que sepas qué le pasa a tu equipo. La reparación la hace un técnico.</p></div><h3>Por tipo de equipo</h3><div class="opts two">${bt(n.o)}</div><h3>Por síntoma</h3><div class="opts two">${bt(SINT)}</div>`;
    else if(n.q)h+=`<div class="card"><small>Paso ${H.length-1}</small><h3>${n.q}</h3>${n.h?`<p class="mu"><b>Cómo hacerlo:</b> ${n.h}</p>`:''}${MMB(n.q+' '+(n.h||''))}<div class="opts">${bt(n.o)}</div></div>`;
-   else h+=`<div class="card"><small>Posible causa</small><h3>${n.r}</h3>${n.c?`<div class="lab">Cómo comprobarlo</div><p>${n.c}</p>`:''}</div><h3>Qué puedes hacer: alternativas</h3>`+SOL(n.S)+(n.mine?`<div class="card"><h3>Lo que yo haría</h3><p>${n.mine}</p></div>`:'')+(n.steps?`<div class="card"><h3>Diagrama de la recomendación</h3>${flow(n.steps)}</div>`:'')+dxExtra(n)+hpCta();
+   else h+=dxResult(n);
    h+=`<div class="chips">${H.length>1?'<button id="bk">← Atrás</button><button id="rs">Empezar de nuevo</button>':''}</div>`;
    el.innerHTML=h};
   el.onclick=e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.k){H.push(b.dataset.k);A.push(b.textContent)}else if(b.id=='bk'){H.pop();A.pop()}else if(b.id=='rs'){H=['start'];A=[]}else return;draw();scrollTo(0,0)};
@@ -619,7 +695,7 @@ function game(box,type){
   $('#gf').innerHTML=`<p class="exp${ok?'':' x'}"><b>${ok?'¡Correcto!':'No exactamente.'}</b> ${cur.e}</p><button class="btn pri" id="gn">Siguiente</button>`};
  next()}
 function games(box){
- box.innerHTML='<p>Tres juegos rápidos con racha. Cada acierto suma XP.</p><div class="opts">'+[['sym','Reconoce el símbolo','15 símbolos de esquemáticos'],['col','Código de colores','Lee el valor de un resistor'],['pre','Prefijos y unidades','mili, kilo, mega y micro']].map(([k,n,d],i)=>`<button data-g="${k}" style="--i:${i}">${n}<br><small>${d}</small></button>`).join('')+'</div>';
+ box.innerHTML='<p>Tres juegos rápidos con racha. Cada acierto suma XP.</p><div class="opts">'+[['sym','Reconoce el símbolo','15 símbolos de esquemáticos'],['col','Código de colores','Lee el valor de un resistor'],['pre','Prefijos y unidades','mili, kilo, mega y micro']].map(([k,n,d],i)=>`<button class="hxo" data-g="${k}" style="--i:${i}"><span class="hxi wide">${HXG[k]()}</span><span><b>${n}</b><br><small>${d}</small></span></button>`).join('')+'</div>';
  box.onclick=e=>{const b=e.target.closest('[data-g]');if(b)game(box,b.dataset.g)}}
 const goalCard=()=>{const x=PR.td==ymd(new Date())?PR.tx:0;return `<div class="card"><h3>Meta de hoy</h3><div class="bar"><i style="width:${Math.min(100,x/50*100)}%"></i></div><small>${x} de 50 XP${x>=50?' · ¡meta cumplida!':''}</small></div>`};
 function quiz(box){
@@ -658,10 +734,11 @@ function quiz(box){
   if(Q.timed){const i=Q.i;setTimeout(()=>{if(Q&&Q.timed&&!Q.over&&Q.i==i){Q.i++;ask()}},700)}};
  if(QUIZPRE){const k=QUIZPRE;QUIZPRE='';build(k)}else lobby()}
 function learn(el){
- const tabs=[['quiz','Quiz'],['games','Juegos'],['retos','Retos de la vida real']];
- el.innerHTML='<h2>Aprendizaje</h2><div class="chips">'+tabs.map(([k,x])=>`<button data-t="${k}">${x}</button>`).join('')+'</div><div id="box"></div>';
+ const tabs=[['quiz','Quiz','¿Cuánto sabes?'],['games','Juegos','Rachas y XP'],['retos','Retos','Casos reales']];
+ const BT={quiz:['Quiz','Responde, suma XP y sube de nivel.'],games:['Juegos','Tres minijuegos con racha: ¿hasta dónde llegas?'],retos:['Retos de la vida real','Piensa tu solución y compárala con las tres respuestas.']};
+ el.innerHTML='<h2>Aprendizaje</h2><div class="hub">'+tabs.map(([k,x,d])=>`<button type="button" data-t="${k}"><span class="hxi">${HXI[k]()}</span><b>${x}</b><small>${d}</small></button>`).join('')+'</div><div id="ban"></div><div id="box"></div>';
  const box=$('#box',el);
- const show=t=>{$$('[data-t]',el).forEach(b=>b.setAttribute('aria-pressed',b.dataset.t==t));box.onclick=null;
+ const show=t=>{$$('[data-t]',el).forEach(b=>b.setAttribute('aria-pressed',b.dataset.t==t));$('#ban',el).innerHTML=`<div class="hxb"><span class="hxi big">${HXI[t]()}</span><div><h3>${BT[t][0]}</h3><p class="mu">${BT[t][1]}</p></div></div>`;box.onclick=null;
   if(t=='quiz')quiz(box);
   else if(t=='games'){if(GAMESEL){const g=GAMESEL;GAMESEL='';game(box,g)}else games(box)}
   else if(t=='retos')box.innerHTML='<p class="mu">Toca un reto, piensa tu solución y compárala con las tres respuestas.</p>'+RETOS.map((p,i)=>`<details style="--i:${i}"><summary><span class="tag">${p.l}</span> ${p.q}</summary><div class="lab">1. Técnica</div><p>${p.a}</p><div class="lab">2. Con palabras sencillas</div><p>${p.b}</p><div class="lab">3. Diagrama de la solución</div>${Array.isArray(p.d)?flow(p.d):`<div class="sch">${ledSVG(1,p.d.v,p.d.r)}</div>`}</details>`).join('');};
@@ -758,10 +835,10 @@ function labs(box){
    const step=now=>{if(!playing||!box.isConnected)return;const v=Math.min(100,from+(now-t0)/30);sl.value=v;upd();if(v>=100)return stop();raf=requestAnimationFrame(step)};raf=requestAnimationFrame(step)}};
  draw()}
 function tools(el){
- el.innerHTML='<h2>Herramientas</h2><div class="card"><h3>¿Cómo empezar?</h3><ol class="how"><li>Elige <b>Calculadoras</b> si quieres un resultado con tus números, o <b>Laboratorio</b> si quieres mover controles y ver qué pasa.</li><li>Escribe tus datos en los campos (cada uno dice su unidad) o mueve los deslizadores.</li><li>El resultado y el dibujo se actualizan solos: no hay botón de calcular.</li></ol></div><div class="opts two"><button data-s="calc"><b>Calculadoras</b><br><small>Ohm, divisor, resistores, LED, código de colores, RC, 555, PWM, kWh, batería, capacitores, unidades y calibre de cable: escribes números y obtienes el resultado.</small></button><button data-s="lab"><b>Laboratorio</b><br><small>Simuladores animados: LED, luz nocturna, capacitor, serie y paralelo, diodo, transistor y 555.</small></button></div><div id="tbox"></div>';
+ el.innerHTML=`<h2>Herramientas</h2><div class="hxh">${hxToolsHero()}<h3>Mide, calcula y prueba</h3><p class="mu">Escribe tus números o mueve los controles: el resultado y el dibujo se actualizan solos.</p><button class="btn pri" type="button" data-st="1">Empezar</button></div><div class="opts two" id="tsel"><button class="hxo" data-s="calc"><span class="hxi">${HXT.calc()}</span><span><b>Calculadoras</b><br><small>Ohm, divisor, resistores, LED, código de colores, RC, 555, PWM, kWh, batería, capacitores, unidades y calibre de cable.</small></span></button><button class="hxo" data-s="lab"><span class="hxi">${HXT.lab()}</span><span><b>Laboratorio</b><br><small>Simuladores animados: LED, luz nocturna, capacitor, serie y paralelo, diodo, transistor y 555.</small></span></button></div><div id="tbox"></div>`;
  const box=$('#tbox',el);
  const show=s=>{$$('[data-s]',el).forEach(b=>b.setAttribute('aria-pressed',b.dataset.s==s));box.oninput=box.onchange=box.onclick=null;if(s=='lab')labs(box);else calcs(box)};
- el.onclick=e=>{const b=e.target.closest('[data-s]');if(b)show(b.dataset.s)};
+ el.onclick=e=>{if(e.target.closest('[data-st]')){$('#tsel',el).scrollIntoView({behavior:R.dataset.anim=='off'?'auto':'smooth',block:'start'});return}const b=e.target.closest('[data-s]');if(b)show(b.dataset.s)};
  show(LABSEL?'lab':'calc')}
 
 /* Navegación, tema e inicio */
@@ -781,7 +858,7 @@ function factShow(i){const p=$('#ft');if(!p)return;clearTimeout(FTID);p.classLis
 function factTimer(){clearTimeout(FTID);const p=$('#ft');if(!p)return;
  const ms=Math.min(7000,Math.max(5000,3000+p.textContent.length*30));
  FTID=setTimeout(()=>{const q=$('#ft');if(!q)return;const c=q.closest('.fact');if(c&&c.matches(':hover,:focus-within')){factTimer();return}factShow((NEW.FACTS.indexOf(q.textContent)+1)%NEW.FACTS.length)},ms)}
-const APP_V='2.9';
+const APP_V='3.0';
 const SAFE='<div class="warn" role="note"><b>Aviso de seguridad.</b> Si no tienes capacitación, no intentes descargar capacitores grandes ni trabajar en circuitos conectados a la red (110 o 220 V): acude a un técnico. Consulta las fuentes en MiniWiki › Fuentes.</div>';
 var RG={ov:[0,1e5],oi:[0,1e4],or:[0.001,1e12],dv:[0,1e5],d1:[0,1e12],d2:[0,1e12],lv:[0,1e3],lf:[0,12],li:[0.01,100],sa:[0,1e12],sb:[0,1e12],rr:[0.001,1e12],rc:[1e-6,1e9],ta:[1,1e12],tb:[1,1e12],tc:[1e-6,1e9],pv:[0,1e3],pd:[0,100],pf:[1e-3,1e9]};
 function rgCheck(){Object.keys(RG).forEach(id=>{const el=document.getElementById(id),er=document.getElementById('er-'+id);if(!el||!er)return;const t=el.value.trim(),x=+t,r=RG[id],bad=t!==''&&(!Number.isFinite(x)||x<r[0]||x>r[1]);el.setAttribute('aria-invalid',bad?'true':'false');er.hidden=!bad;er.textContent=bad?'Valor fuera de rango: usa de '+r[0]+' a '+r[1]+'.':''})}
@@ -916,11 +993,10 @@ function gsFocus(t){const h=$$('#tbox .card h3').find(x=>x.textContent.includes(
  c.scrollIntoView({block:'start',behavior:R.dataset.anim=='off'?'auto':'smooth'});c.style.outline='2px solid var(--ac)';setTimeout(()=>{c.style.outline=''},2400)}
 
 /* --- Resumen del diagnóstico y enlaces relacionados --- */
-function dxSummary(n,H,A){const L=['Resumen de diagnóstico (HPextras v'+APP_V+')'];
+function dxSummary(n,H,A){const L=['Pre-diagnóstico (HPextras v'+APP_V+')'];
  if(H.length>2){L.push('Equipo o síntoma: '+A[0]);const q=[];for(let j=1;j<H.length-1;j++){const m=TREE[H[j]];if(m&&m.q&&A[j])q.push('- '+plain(m.q)+' → '+A[j])}if(q.length)L.push('Respuestas elegidas:',...q)}
- L.push('Causa probable: '+n.r);if(n.c)L.push('Cómo comprobarlo: '+plain(n.c));
- (n.S||[]).slice(0,4).forEach((x,i)=>L.push((i+1)+'. '+(x.n||'Alternativa')+': '+plain(x.s||x.t)));
- L.push('Es una orientación: si el aparato va conectado a la red (110 o 220 V), consulta a un técnico.');return L.join('\n')}
+ L.push('Falla probable: '+n.r);if(n.c)L.push('Cómo se confirma: '+plain(n.c));
+ L.push('Es solo una idea inicial: un técnico debe revisar el equipo. Si va conectado a la red (110 o 220 V), no lo abras.');return L.join('\n')}
 function cpFb(s){try{const a=document.createElement('textarea');a.value=s;a.setAttribute('readonly','');a.style.cssText='position:fixed;top:0;left:0;opacity:0';document.body.appendChild(a);a.select();const r=document.execCommand('copy');a.remove();return r}catch(e){return false}}
 function dxCopy(){const s=DXS;if(!s)return;const ok=()=>toast('Resumen copiado'),bad=()=>toast('No se pudo copiar. Inténtalo de nuevo');
  if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(s).then(ok,()=>cpFb(s)?ok():bad());else cpFb(s)?ok():bad()}
