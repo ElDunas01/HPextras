@@ -1,6 +1,6 @@
 // Service worker: guarda la app para usarla sin conexión.
 // Al cambiar index.html, sube el número de versión para que los teléfonos descarguen la nueva.
-var VERSION = "3.0";
+var VERSION = "4.2";
 var CACHE = "hpextras-v" + VERSION;
 var ARCHIVOS = ["./", "./index.html", "./manifest.webmanifest", "./favicon-64.png", "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png"];
 self.addEventListener("install", function (e) {
